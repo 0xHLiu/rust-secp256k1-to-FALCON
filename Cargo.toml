@@ -36,6 +36,7 @@ global-context = ["std"]
 global-context-less-secure = ["global-context"]
 
 [dependencies]
+falcon-rust = "0.1.2"
 secp256k1-sys = { version = "0.10.0", default-features = false, path = "./secp256k1-sys" }
 serde = { version = "1.0.103", default-features = false, optional = true }
 
@@ -67,6 +68,18 @@ required-features = ["hashes-std"]
 
 [[example]]
 name = "generate_keys"
+required-features = ["rand-std"]
+
+[[example]]
+name = "sign_verify_recovery_FALCON"
+required-features = ["recovery", "hashes-std"]
+
+[[example]]
+name = "sign_verify_FALCON"
+required-features = ["hashes-std"]
+
+[[example]]
+name = "generate_keys_FALCON"
 required-features = ["rand-std"]
 
 [workspace]
