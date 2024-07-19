@@ -189,7 +189,7 @@ mod test {
     use num::One;
     use rand::{thread_rng, Rng, RngCore};
 
-    use crate::{
+    use crate::falcon::{
         cyclotomic_fourier::CyclotomicFourier,
         field::{Felt, Q},
         inverse::Inverse,

@@ -117,7 +117,7 @@ mod test {
     use rand::RngCore;
     use std::{thread::sleep, time::Duration};
 
-    use crate::samplerz::{approx_exp, ber_exp, sampler_z};
+    use crate::falcon::samplerz::{approx_exp, ber_exp, sampler_z};
 
     /// RNG used only for testing purposes, whereby the produced
     /// string of random bytes is equal to the one it is initialized

@@ -285,7 +285,7 @@ mod test {
     use num::{BigInt, FromPrimitive};
     use rand::{thread_rng, Rng};
 
-    use crate::{
+    use crate::falcon::{
         math::{gen_poly, gram_schmidt_norm_squared, ntru_gen, ntru_solve},
         polynomial::Polynomial,
     };

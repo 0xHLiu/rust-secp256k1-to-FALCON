@@ -634,9 +634,9 @@ pub(crate) fn hash_to_point(string: &[u8], n: usize) -> Polynomial<Felt> {
 mod test {
     use std::default::Default;
 
-    use crate::field::Felt;
-    use crate::polynomial::hash_to_point;
-    use crate::polynomial::Polynomial;
+    use crate::falcon::{field::Felt,
+                        polynomial::hash_to_point,
+                        polynomial::Polynomial};
     use itertools::Itertools;
     use rand::thread_rng;
     use rand::Rng;

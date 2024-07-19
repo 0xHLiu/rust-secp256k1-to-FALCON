@@ -131,7 +131,7 @@ mod test {
     use rand::{thread_rng, Rng};
     use rand_distr::num_traits::Zero;
 
-    use crate::{ffsampling::gram, polynomial::Polynomial};
+    use crate::falcon::{ffsampling::gram, polynomial::Polynomial};
 
     #[test]
     fn test_gram() {

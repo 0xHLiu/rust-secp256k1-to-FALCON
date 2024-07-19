@@ -272,7 +272,7 @@ pub(crate) fn decompress(x: &[u8], n: usize) -> Option<Vec<i16>> {
 #[cfg(test)]
 mod test {
 
-    use crate::{
+    use crate::falcon::{
         encoding::{compress, compress_slow, decompress, decompress_slow},
         field::Q,
     };
