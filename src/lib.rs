@@ -163,6 +163,7 @@ mod secret;
 mod context;
 mod key;
 
+pub mod falcon;
 pub mod constants;
 pub mod ecdh;
 pub mod ecdsa;

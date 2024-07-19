@@ -1,9 +1,18 @@
+#![allow(unused)]
+
 extern crate secp256k1;
-use falcon_rust::falcon512;
 use rand::thread_rng;
 use rand::Rng;
 
 use secp256k1::{PublicKey, Secp256k1, SecretKey};
+
+mod falcon;
+
+fn random_32_bytes<R: rand::Rng + ?Sized>(rng: &mut R) -> [u8; 32] {
+    let mut ret = [0u8; 32];
+    rng.fill(&mut ret);
+    ret
+}
 
 fn main() {
     let secp = Secp256k1::new();
@@ -18,14 +27,20 @@ fn main() {
     assert_eq!(pubkey, PublicKey::from_secret_key(&secp, &seckey));
 
     println!("{:?}", rng);
+    let mut data = random_32_bytes(&mut rng);
+    println!("{:?}", data);
+
+    let random_value: [u8; 32] = thread_rng().gen();
+    println!("{:?}", random_value);
+
     // println!("{:?}", thread_rng().gen());
 
-    // let (falcon_seckey, falcon_pubkey) = falcon512::keygen(thread_rng().gen());
+    let (falcon_seckey, falcon_pubkey) = falcon512::keygen(random_value);
 
-    // println!("Falcon Secret Key: {:?}", falcon_seckey);
-    // println!("Falocn Public Key: {:?}", falcon_pubkey);
+    println!("Falcon Secret Key: {:?}", falcon_seckey);
+    println!("Falcon Public Key: {:?}", falcon_pubkey);
 
     // Second option:
-    let seckey = SecretKey::new(&mut rng);
-    let _pubkey = PublicKey::from_secret_key(&secp, &seckey);
+    // let seckey = SecretKey::new(&mut rng);
+    // let _pubkey = PublicKey::from_secret_key(&secp, &seckey);
 }

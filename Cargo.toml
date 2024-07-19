@@ -23,7 +23,7 @@ std = ["alloc", "secp256k1-sys/std"]
 # allow use of Secp256k1::new and related API that requires an allocator
 alloc = ["secp256k1-sys/alloc"]
 hashes-std = ["std", "hashes/std"]
-rand-std = ["std", "rand", "rand/std", "rand/std_rng"]
+rand-std = ["std", "rand/std", "rand/std_rng"]
 recovery = ["secp256k1-sys/recovery"]
 lowmemory = ["secp256k1-sys/lowmemory"]
 global-context = ["std"]
@@ -36,16 +36,36 @@ global-context = ["std"]
 global-context-less-secure = ["global-context"]
 
 [dependencies]
-falcon-rust = "0.1.2"
+#falcon-rust = "0.1.2"
+#FALCON
+bit-vec = "0.6"
+rand = "0.8.5"
+#rand = { version = "0.8.5", default-features = true, optional = true }
+rand_distr = "0.4.3"
+rand_chacha = "0.3.1"
+itertools = "0.12.0"
+hex = "0.4.3"
+sha3 = "0.10.8"
+num-complex = "0.4.4"
+num = "0.4.1"
+
+#Others
 secp256k1-sys = { version = "0.10.0", default-features = false, path = "./secp256k1-sys" }
 serde = { version = "1.0.103", default-features = false, optional = true }
 
 # You likely only want to enable these if you explicitly do not want to use "std", otherwise enable
 # the respective -std feature e.g., hashes-std
 hashes = { package = "bitcoin_hashes", version = ">= 0.12, <= 0.14", default-features = false, optional = true }
-rand = { version = "0.8", default-features = false, optional = true }
+
+#Used by both FALCON and secp256k1
+#rand = { version = "0.8", default-features = false, optional = true }
 
 [dev-dependencies]
+#FALCON
+proptest = "1.4.0"
+proptest-derive = "0.4.0"
+
+#Others
 rand_core = "0.6"
 serde_cbor = "0.10.0"
 serde_test = "1.0.19"
@@ -85,3 +105,9 @@ required-features = ["rand-std"]
 [workspace]
 members = ["secp256k1-sys"]
 exclude = ["no_std_test"]
+
+[profile.test.package.proptest]
+opt-level = 3
+
+[profile.test.package.rand_chacha]
+opt-level = 3
