@@ -188,7 +188,6 @@ impl SecretKey {
     /// # }
     /// ```
     #[inline]
-    #[cfg(feature = "rand")]
     pub fn new<R: rand::Rng + ?Sized>(rng: &mut R) -> SecretKey {
         let mut data = crate::random_32_bytes(rng);
         unsafe {
@@ -865,7 +864,6 @@ impl Keypair {
     /// # }
     /// ```
     #[inline]
-    #[cfg(feature = "rand")]
     pub fn new<R: rand::Rng + ?Sized, C: Signing>(secp: &Secp256k1<C>, rng: &mut R) -> Keypair {
         let mut data = crate::random_32_bytes(rng);
         unsafe {
@@ -1527,7 +1525,6 @@ impl<'de> serde::Deserialize<'de> for XOnlyPublicKey {
 mod test {
     use core::str::FromStr;
 
-    #[cfg(feature = "rand")]
     use rand::{self, rngs::mock::StepRng, RngCore};
     use serde_test::{Configure, Token};
     #[cfg(target_arch = "wasm32")]

@@ -179,7 +179,6 @@ use core::{fmt, mem, str};
 
 #[cfg(all(feature = "global-context", feature = "std"))]
 pub use context::global::{self, SECP256K1};
-#[cfg(feature = "rand")]
 pub use rand;
 pub use secp256k1_sys as ffi;
 #[cfg(feature = "serde")]
@@ -401,10 +400,6 @@ impl<C: Context> Secp256k1<C> {
     }
 
     /// (Re)randomizes the Secp256k1 context for extra sidechannel resistance.
-    ///
-    /// Requires compilation with "rand" feature. See comment by Gregory Maxwell in
-    /// [libsecp256k1](https://github.com/bitcoin-core/secp256k1/commit/d2275795ff22a6f4738869f5528fbbb61738aa48).
-    #[cfg(feature = "rand")]
     pub fn randomize<R: rand::Rng + ?Sized>(&mut self, rng: &mut R) {
         let mut seed = [0u8; 32];
         rng.fill_bytes(&mut seed);
@@ -434,7 +429,6 @@ impl<C: Signing> Secp256k1<C> {
     /// Generates a random keypair. Convenience function for [`SecretKey::new`] and
     /// [`PublicKey::from_secret_key`].
     #[inline]
-    #[cfg(feature = "rand")]
     pub fn generate_keypair<R: rand::Rng + ?Sized>(
         &self,
         rng: &mut R,
@@ -501,7 +495,6 @@ fn to_hex<'a>(src: &[u8], target: &'a mut [u8]) -> Result<&'a str, ()> {
     return unsafe { Ok(str::from_utf8_unchecked(result)) };
 }
 
-#[cfg(feature = "rand")]
 pub(crate) fn random_32_bytes<R: rand::Rng + ?Sized>(rng: &mut R) -> [u8; 32] {
     let mut ret = [0u8; 32];
     rng.fill(&mut ret);

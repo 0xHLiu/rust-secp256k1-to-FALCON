@@ -6,7 +6,7 @@ use rand::Rng;
 
 use secp256k1::{PublicKey, Secp256k1, SecretKey};
 
-mod falcon;
+use secp256k1::falcon::falcon512;
 
 fn random_32_bytes<R: rand::Rng + ?Sized>(rng: &mut R) -> [u8; 32] {
     let mut ret = [0u8; 32];

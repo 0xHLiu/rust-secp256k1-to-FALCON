@@ -5,7 +5,6 @@
 
 use core::{fmt, ptr, str};
 
-#[cfg(feature = "rand")]
 use rand::{CryptoRng, Rng};
 use secp256k1_sys::SchnorrSigExtraParams;
 
@@ -149,7 +148,6 @@ impl<C: Signing> Secp256k1<C> {
 
     /// Creates a schnorr signature using the given random number generator to
     /// generate the auxiliary random data.
-    #[cfg(feature = "rand")]
     pub fn sign_schnorr_with_rng<R: Rng + CryptoRng>(
         &self,
         msg: &[u8],

@@ -45,7 +45,6 @@ impl Scalar {
     pub fn random() -> Self { Self::random_custom(rand::thread_rng()) }
 
     /// Generates a random scalar using supplied RNG
-    #[cfg(feature = "rand")]
     pub fn random_custom<R: rand::Rng>(mut rng: R) -> Self {
         let mut bytes = [0u8; 32];
         loop {
