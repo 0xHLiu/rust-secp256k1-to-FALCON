@@ -58,7 +58,6 @@
 pub(crate) mod cyclotomic_fourier;
 pub(crate) mod encoding;
 pub(crate) mod falcon;
-pub mod falcon1024;
 pub mod falcon512;
 pub(crate) mod fast_fft;
 pub(crate) mod ffsampling;

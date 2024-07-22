@@ -187,7 +187,6 @@ fn ntru_solve(
 ///
 /// [1]: https://falcon-sign.info/falcon.pdf
 pub(crate) fn ntru_gen(
-    n: usize,
     seed: [u8; 32],
 ) -> (
     Polynomial<i16>,
@@ -197,8 +196,8 @@ pub(crate) fn ntru_gen(
 ) {
     let mut rng: StdRng = SeedableRng::from_seed(seed);
     loop {
-        let f = gen_poly(n, &mut rng);
-        let g = gen_poly(n, &mut rng);
+        let f = gen_poly(512, &mut rng);
+        let g = gen_poly(512, &mut rng);
         let f_ntt = f.map(|&i| Felt::new(i)).fft();
         if f_ntt.coefficients.iter().any(|e| e.is_zero()) {
             continue;
@@ -296,7 +295,7 @@ mod test {
     fn test_ntru_gen() {
         let n = 512;
         let mut rng = thread_rng();
-        let (f, g, capital_f, capital_g) = ntru_gen(n, rng.gen());
+        let (f, g, capital_f, capital_g) = ntru_gen(rng.gen());
 
         let f_times_capital_g = (f * capital_g).reduce_by_cyclotomic(n);
         let g_times_capital_f = (g * capital_f).reduce_by_cyclotomic(n);

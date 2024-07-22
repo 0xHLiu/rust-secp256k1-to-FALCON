@@ -1,8 +1,8 @@
 use crate::falcon::falcon;
 
-pub type SecretKey = falcon::SecretKey<512>;
-pub type PublicKey = falcon::PublicKey<512>;
-pub type Signature = falcon::Signature<512>;
+pub type SecretKey = falcon::SecretKey;
+pub type PublicKey = falcon::PublicKey;
+pub type Signature = falcon::Signature;
 
 pub fn keygen(seed: [u8; 32]) -> (SecretKey, PublicKey) {
     falcon::keygen(seed)
